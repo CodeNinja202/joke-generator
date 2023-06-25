@@ -1,33 +1,23 @@
-import React, { useEffect, useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// Imports
+import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
+import './index.css';
+////////////////////////////////////////////////////////////////
 
 
+//API KEY
+const ApiKey = process.env.REACT_APP_API_KEY;
+
+//Start of APP component
 function App() {
+
+  //state variables
   const [joke, setJoke] = useState("");
-  const [bgColor, setBgColor] = useState("");
-// Random color array
-const colors = [
-  "#FF6633",
-  "#FFB399",
-  "#FF33FF",
-  "#FFFF99",
-  "#00B3E6",
-  "#E6B333",
-  "#3366E6",
-  "#1D4350"
-];
+////////////////////////////////////////////////////////////////
 
-// sets a random color
-const setRandomColor = () => {
-  const randomIndex = Math.floor(Math.random() * 7);
-  const randomColor = colors[randomIndex];
-  setBgColor(randomColor);
-};
-
-// ENDS
+// makes api fetch reguest route to the API server
   const fetchData = async () => {
     try {
       const response = await fetch(
@@ -35,7 +25,7 @@ const setRandomColor = () => {
         {
           method: "GET",
           headers: {
-            "X-Api-Key": "pjkZnEzM/5dkyQJ4b98whg==ce6AakzWVr9lkCIM",
+            "X-Api-Key": ApiKey,
           },
         }
       );
@@ -51,28 +41,26 @@ const setRandomColor = () => {
 
   const handleButtonClick = () => {
     fetchData();
-    setRandomColor();
   };
-  useEffect(() => {
-    document.body.style.backgroundColor = bgColor;
-  }, [bgColor]);
 
-  // ENDS
+  
+
   return (
-    <div className="App">
-
-<Card style={{ width: '18rem' }}>
-      <Card.Body>
-        <Card.Title>Jokes</Card.Title>
-        <Card.Text>
-        {joke}
-        </Card.Text>
-        <Button variant="primary" onClick={handleButtonClick}>More Jokes</Button>
-      </Card.Body>
-    </Card>
-
+    <div className="background-image">
+      <div className="card-container">
+        <Card className="bg-dark text-white">
+          <div className="card-content">
+            <Card.Title className="card-title">Card title</Card.Title>
+            <Card.Text className="card-text">{joke}</Card.Text>
+            <Button className="btn" variant="primary" onClick={handleButtonClick}>
+              Click me for Jokes
+            </Button>
+          </div>
+        </Card>
+      </div>
     </div>
   );
+  
 }
 
 export default App;
