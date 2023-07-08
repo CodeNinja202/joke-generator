@@ -1,49 +1,31 @@
 // Imports
 import React, { useState } from "react";
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-
-import './index.css';
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import "./index.css";
 ////////////////////////////////////////////////////////////////
 
-
-//API KEY
-const ApiKey = process.env.REACT_APP_API_KEY;
+//API Imports
+import { getJokes } from "./API";
 
 //Start of APP component
 function App() {
-
   //state variables
   const [joke, setJoke] = useState("");
-////////////////////////////////////////////////////////////////
-
-// makes api fetch reguest route to the API server
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        "https://api.api-ninjas.com/v1/dadjokes?limit=1",
-        {
-          method: "GET",
-          headers: {
-            "X-Api-Key": ApiKey,
-          },
-        }
-      );
-
-      const result = await response.json();
-      if (result && result.length > 0) {
-        setJoke(result[0].joke);
-      }
-    } catch (error) {
-      console.error(error);
+  ////////////////////////////////////////////////////////////////
+console.log(joke)
+  //fetch all jokes from api server
+  async function fetchJokes() {
+    const result = await getJokes();
+    if (result && result.length > 0) {
+      setJoke(result[0].joke);
     }
-  };
+  }
 
+  //Button when clicked a joke is fetched from api server
   const handleButtonClick = () => {
-    fetchData();
+    fetchJokes();
   };
-
-  
 
   return (
     <div className="background-image">
@@ -52,7 +34,11 @@ function App() {
           <div className="card-content">
             <Card.Title className="card-title">Card title</Card.Title>
             <Card.Text className="card-text">{joke}</Card.Text>
-            <Button className="btn" variant="primary" onClick={handleButtonClick}>
+            <Button
+              className="btn"
+              variant="primary"
+              onClick={handleButtonClick}
+            >
               Click me for Jokes
             </Button>
           </div>
@@ -60,7 +46,6 @@ function App() {
       </div>
     </div>
   );
-  
 }
 
 export default App;
