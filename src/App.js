@@ -13,7 +13,7 @@ function App() {
   //state variables
   const [joke, setJoke] = useState("");
   ////////////////////////////////////////////////////////////////
-console.log(joke)
+
   //fetch all jokes from api server
   async function fetchJokes() {
     const result = await getJokes();
