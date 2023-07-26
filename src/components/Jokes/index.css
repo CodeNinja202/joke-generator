@@ -1,0 +1,65 @@
+body {
+  margin: 0; /* Remove default body margin */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 100vh; /* Set a minimum height to ensure content stretches to the bottom */
+  background-image: url("../Photos/backGround.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.card-container {
+  
+  position: absolute;
+  bottom: 0;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+/* Mobile First Styles */
+.card-content {
+  max-width: 100%;
+  text-align: center;
+  margin-bottom: 2px;
+  font-size: 15px; /* Default font size for mobile */
+}
+
+.btn {
+  margin-top: 20px;
+  padding: 10px 20px; /* Default padding for mobile */
+  border-radius: 5px; /* Default border radius for mobile */
+}
+
+/* Tablet Styles */
+@media (min-width: 968px) {
+  .card-content {
+    height: 36%;
+    width:45%;
+    font-size: 20px; /* Increase font size for tablet */
+  }
+
+  .btn {
+    padding: 12px 24px; /* Increase padding for tablet */
+    border-radius: 8px; /* Increase border radius for tablet */
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 2024px) {
+  .card-content {
+    height: 75%;
+    margin-bottom: 12%;
+    width:45%;
+    font-size: 35px; /* Increase font size for desktop */
+  }
+
+  .btn {
+    padding: 14px 28px; /* Increase padding for desktop */
+    border-radius: 10px; /* Increase border radius for desktop */
+  }
+}
